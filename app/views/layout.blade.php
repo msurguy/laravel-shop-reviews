@@ -79,7 +79,7 @@
       <footer>
         <div class="row">
           <div class="col-md-12">
-            Created by Maks
+            Created by <a href="http://maxoffsky.com" target="_blank">Maks</a>
           </div>
         </div>
       </footer>
