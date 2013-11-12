@@ -26,6 +26,7 @@ return array(
 	|
 	*/
 
-	'pagination' => 'pagination::slider',
+	// Bootstrap 3 paginator
+	'pagination' => 'pagination::slider-3',
 
 );

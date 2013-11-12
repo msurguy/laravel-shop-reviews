@@ -7,6 +7,7 @@
   <script type="text/javascript">
     $(function(){
 
+      // initialize the autosize plugin on the review text area
       $('#new-review').autosize({append: "\n"});
 
       var reviewBox = $('#post-review-box');
@@ -38,10 +39,12 @@
         
       });
 
+      // If there were validation errors we need to open the comment form programmatically 
       @if($errors->first('comment') || $errors->first('rating'))
         openReviewBtn.click();
       @endif
 
+      // Bind the change event for the star rating - store the rating value in a hidden field
       $('.starrr').on('starrr:change', function(e, value){
         ratingsField.val(value);
       });
@@ -51,14 +54,15 @@
 
 @section('styles')
   <style type="text/css">
+
+     /* Enhance the look of the textarea expanding animation */
      .animated {
         -webkit-transition: height 0.2s;
         -moz-transition: height 0.2s;
         transition: height 0.2s;
       }
 
-      .stars
-      {
+      .stars {
         margin: 20px 0;
         font-size: 24px;
         color: #d17581;
@@ -72,8 +76,8 @@
             <p class="lead">Shop Categories</p>
             <div class="list-group">
               <a href="#" class="list-group-item active">HTML Templates</a>
-              <a href="#" class="list-group-item">Printable</a>
-              <a href="#" class="list-group-item">Cupcake wrappers</a>
+              <a href="#" class="list-group-item">Themes</a>
+              <a href="#" class="list-group-item">Courses</a>
             </div>
         </div>
         <div class="col-md-9">
@@ -88,9 +92,10 @@
               <div class="ratings">
                   <p class="pull-right">{{$product->rating_count}} {{ Str::plural('review', $product->rating_count);}}</p>
                   <p>
-                      @for ($i=1; $i <= 5 ; $i++)
-                          <span class="glyphicon glyphicon-star{{ ($i <= $product->rating_cache) ? '' : '-empty'}}"></span>
-                      @endfor
+                    @for ($i=1; $i <= 5 ; $i++)
+                      <span class="glyphicon glyphicon-star{{ ($i <= $product->rating_cache) ? '' : '-empty'}}"></span>
+                    @endfor
+                    {{ $product->rating_cache }} stars
                   </p>
               </div>
             </div>
@@ -98,25 +103,25 @@
               <div class="row">
                 <div class="col-md-12">
                   @if(Session::get('errors'))
-                      <div class="alert alert-danger">
-                          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                           <h5>There were errors while submitting this review:</h5>
-                           @foreach($errors->all('<li>:message</li>') as $message)
-                              {{$message}}
-                           @endforeach
-                      </div>
+                    <div class="alert alert-danger">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                       <h5>There were errors while submitting this review:</h5>
+                       @foreach($errors->all('<li>:message</li>') as $message)
+                          {{$message}}
+                       @endforeach
+                    </div>
                   @endif
                   @if(Session::has('review_posted'))
-                      <div class="alert alert-success">
-                          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                           <h5>Your review has been posted!</h5>
-                      </div>
+                    <div class="alert alert-success">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                      <h5>Your review has been posted!</h5>
+                    </div>
                   @endif
                   @if(Session::has('review_removed'))
-                      <div class="alert alert-success">
-                          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                           <h5>Your review has been removed!</h5>
-                      </div>
+                    <div class="alert alert-success">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                      <h5>Your review has been removed!</h5>
+                    </div>
                   @endif
                 </div>
               </div>
@@ -137,21 +142,21 @@
                 </div>
               </div>
 
-              @foreach($ratings as $rating)
+              @foreach($reviews as $review)
               <hr>
                 <div class="row">
                   <div class="col-md-12">
-                    <div>
-                      @for ($i=1; $i <= 5 ; $i++)
-                          <span class="glyphicon glyphicon-star{{ ($i <= $rating->rating) ? '' : '-empty'}}"></span>
-                      @endfor
-                      {{ $rating->user ? $rating->user->name : 'Anonymous'}} <span class="pull-right">{{$rating->timeago}}</span> 
-                    </div>
-                    <p>{{{$rating->comment}}}</p>
+                    @for ($i=1; $i <= 5 ; $i++)
+                      <span class="glyphicon glyphicon-star{{ ($i <= $review->rating) ? '' : '-empty'}}"></span>
+                    @endfor
+
+                    {{ $review->user ? $review->user->name : 'Anonymous'}} <span class="pull-right">{{$review->timeago}}</span> 
                     
+                    <p>{{{$review->comment}}}</p>
                   </div>
                 </div>
               @endforeach
+              {{ $reviews->links(); }}
             </div>
         </div>
 

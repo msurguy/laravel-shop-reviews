@@ -1,8 +1,9 @@
 <?php
 
-class Rating extends Eloquent
+class Review extends Eloquent
 {
 
+    // Validation rules for the ratings
     public function getCreateRules()
     {
         return array(
@@ -11,6 +12,7 @@ class Rating extends Eloquent
         );
     }
 
+    // Relationships
     public function user()
     {
         return $this->belongsTo('User');
@@ -21,6 +23,7 @@ class Rating extends Eloquent
         return $this->belongsTo('Product');
     }
 
+    // Scopes
     public function scopeApproved($query)
     {
        	return $query->where('approved', true);
@@ -36,20 +39,22 @@ class Rating extends Eloquent
        	return $query->where('spam', false);
     }
 
+    // Attribute presenters
     public function getTimeagoAttribute()
     {
     	$date = \Carbon\Carbon::createFromTimeStamp(strtotime($this->updated_at))->diffForHumans();
     	return $date;
     }
 
-    public function storeForProduct($productID, $comment, $rating)
+    // this function takes in product ID, comment and the rating and attaches the review to the product by its ID, then the average rating for the product is recalculated
+    public function storeReviewForProduct($productID, $comment, $rating)
     {
         $product = Product::find($productID);
 
         //$this->user_id = Auth::user()->id;
         $this->comment = $comment;
         $this->rating = $rating;
-        $product->ratings()->save($this);
+        $product->reviews()->save($this);
 
         // recalculate ratings for the specified product
         $product->recalculateRating($rating);
