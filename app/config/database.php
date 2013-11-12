@@ -54,10 +54,10 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'shop-rating',
-			'username'  => 'root',
-			'password'  => 'root',
+			'host'      => isset($_SERVER['DB1_HOST']) ? $_SERVER['DB1_HOST'] : 'localhost',
+			'database'  => isset($_SERVER['DB1_NAME']) ? $_SERVER['DB1_NAME'] : 'shop-rating',
+			'username'  => isset($_SERVER['DB1_USER']) ? $_SERVER['DB1_USER'] : 'root',
+			'password'  => isset($_SERVER['DB1_PASS']) ? $_SERVER['DB1_PASS'] : 'root',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
@@ -114,7 +114,7 @@ return array(
 		'cluster' => true,
 
 		'default' => array(
-			'host'     => '127.0.0.1',
+			'host'     => 'tunnel.pagodabox.com',
 			'port'     => 6379,
 			'database' => 0,
 		),

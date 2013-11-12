@@ -75,9 +75,8 @@
         <div class="col-md-3">
             <p class="lead">Shop Categories</p>
             <div class="list-group">
-              <a href="#" class="list-group-item active">HTML Templates</a>
-              <a href="#" class="list-group-item">Themes</a>
-              <a href="#" class="list-group-item">Courses</a>
+              <a href="#" class="list-group-item active">Printable</a>
+              <a href="#" class="list-group-item">Cupcake wrappers</a>
             </div>
         </div>
         <div class="col-md-9">

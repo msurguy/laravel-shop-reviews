@@ -5,7 +5,6 @@
         <div class="col-md-3">
             <p class="lead">Shop Categories</p>
             <div class="list-group">
-              <a href="#" class="list-group-item active">HTML Templates</a>
               <a href="#" class="list-group-item">Printable</a>
               <a href="#" class="list-group-item">Cupcake wrappers</a>
             </div>
