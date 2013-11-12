@@ -94,7 +94,7 @@
                     @for ($i=1; $i <= 5 ; $i++)
                       <span class="glyphicon glyphicon-star{{ ($i <= $product->rating_cache) ? '' : '-empty'}}"></span>
                     @endfor
-                    {{ $product->rating_cache }} stars
+                    {{ number_format($product->rating_cache, 1);}} stars
                   </p>
               </div>
             </div>
