@@ -40,7 +40,7 @@
             </div>
             <div class="row">
             @foreach($products as $product)
-                <div class="col-xs-6 col-sm-4 col-lg-4 col-md-4">
+                <div class="col-sm-4 col-lg-4 col-md-4">
                   <div class="thumbnail">
                     <img src="http://placehold.it/320x120" alt="">
                     <div class="caption">
