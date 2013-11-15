@@ -24,7 +24,7 @@ web1:
     - /public/img/avatars
     - /public/img/screenshots/temp
   after_build:
-    - "if [ ! -f composer.phar ]; then curl -s http://getcomposer.org/installer | php; fi; php composer.phar install --prefer-source"
+    - "if [ ! -f composer.phar ]; then curl -s http://getcomposer.org/installer | php; fi; php composer.phar install --prefer-dist"
   after_deploy:
     - "rm -f app/storage/cache/*"
     - "php artisan cache:clear"

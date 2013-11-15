@@ -8,7 +8,7 @@ class Review extends Eloquent
     {
         return array(
             'comment'=>'required|min:10',
-            'rating'=>'required'
+            'rating'=>'required|integer|between:1,5'
         );
     }
 
@@ -42,7 +42,7 @@ class Review extends Eloquent
     // Attribute presenters
     public function getTimeagoAttribute()
     {
-    	$date = \Carbon\Carbon::createFromTimeStamp(strtotime($this->updated_at))->diffForHumans();
+    	$date = \Carbon\Carbon::createFromTimeStamp(strtotime($this->created_at))->diffForHumans();
     	return $date;
     }
 
