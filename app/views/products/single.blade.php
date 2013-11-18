@@ -134,7 +134,7 @@
                   {{Form::textarea('comment', null, array('rows'=>'5','id'=>'new-review','class'=>'form-control animated','placeholder'=>'Enter your review here...'))}}
                   <div class="text-right">
                     <div class="stars starrr" data-rating="{{Input::old('rating',0)}}"></div>
-                    <a href="#" class="btn btn-danger btn-sm" id="close-review-box" style="display:none;"> <span class="glyphicon glyphicon-remove"></span>Cancel</a>
+                    <a href="#" class="btn btn-danger btn-sm" id="close-review-box" style="display:none; margin-right:10px;"> <span class="glyphicon glyphicon-remove"></span>Cancel</a>
                     <button class="btn btn-success btn-lg" type="submit">Save</button>
                   </div>
                 {{Form::close()}}
